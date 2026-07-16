@@ -14,7 +14,10 @@ class ContactController extends Controller
 
     public function store(ContactRequest $request): JsonResponse
     {
-        $result = $this->contactService->handle($request->validated());
+        $result = $this->contactService->handle(
+            $request->validated(),
+            $request->ip()
+        );
         return response()->json($result);
     }
 }

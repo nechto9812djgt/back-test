@@ -15,9 +15,9 @@ class ContactService
     ) {
     }
 
-    public function handle(array $data): array
+    public function handle(array $data, string $ip): array
     {
-        if (!$this->rateLimitService->check(request()->ip())) {
+        if (!$this->rateLimitService->check($ip)) {
             throw new HttpResponseException(
                 response()->json([
                     'success' => false,
@@ -25,6 +25,8 @@ class ContactService
                 ], 429)
             );
         }
+
+        $this->metricsService->increment('unknown');
 
         return [
             'success' => $this->logService->contact($data, 'success'),
