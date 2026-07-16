@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Exceptions\HttpResponseException;
+
 class ContactService
 {
     public function __construct(
@@ -14,6 +16,15 @@ class ContactService
 
     public function handle(array $data): array
     {
+        if (!$this->rateLimitService->check(request()->ip())) {
+            throw new HttpResponseException(
+                response()->json([
+                    'success' => false,
+                    'message' => 'Too many requests.'
+                ], 429)
+            );
+        }
+
         return [
             'success' => true,
             'message' => 'Request received',
