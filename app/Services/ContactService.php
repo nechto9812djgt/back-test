@@ -27,9 +27,11 @@ class ContactService
         }
 
         $this->metricsService->increment('unknown');
+        $this->logService->contact($data, 'success');
+        $this->mailService->send($data);
 
         return [
-            'success' => $this->logService->contact($data, 'success'),
+            'success' => true,
             'message' => 'Request received',
             'data' => $data,
         ];
