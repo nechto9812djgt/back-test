@@ -10,7 +10,8 @@ class ContactService
         private RateLimitService $rateLimitService,
         private MetricsService $metricsService,
         private MailService $mailService,
-        private AIService $aiService
+        private AIService $aiService,
+        private LogService $logService
     ) {
     }
 
@@ -26,7 +27,7 @@ class ContactService
         }
 
         return [
-            'success' => true,
+            'success' => $this->logService->contact($data, 'success'),
             'message' => 'Request received',
             'data' => $data,
         ];
