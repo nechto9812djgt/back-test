@@ -571,3 +571,15 @@ AI was primarily used for:
 - generating documentation.
 
 All generated code was reviewed, tested, and adapted before being integrated into the project.
+
+# Postman Collection
+
+The project includes a Postman collection for testing the API.
+
+Location:
+
+```text
+back-test.postman_collection.json
+```
+
+Import the collection into Postman and use it to test all available endpoints.
