@@ -8,6 +8,8 @@ use Illuminate\Http\JsonResponse;
 use App\Services\ContactService;
 use OpenApi\Annotations as OA;
 
+use Illuminate\Support\Facades\Log;
+
 class ContactController extends Controller
 {
     public function __construct(private ContactService $contactService)

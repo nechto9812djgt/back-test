@@ -31,7 +31,7 @@ class ContactService
 
         $this->metricsService->increment($sentiment);
         $this->logService->contact($data, 'success');
-        $this->mailService->send($data);
+        // $this->mailService->send($data);
 
         return [
             'success' => true,
