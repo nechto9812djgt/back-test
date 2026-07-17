@@ -1,0 +1,73 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Developer Landing API",
+        "description": "REST API for contact form with AI integration",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "Local server"
+        }
+    ],
+    "paths": {
+        "/api/contact": {
+            "post": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Send contact form",
+                "operationId": "091364660aac946c17e7253400cb3f89",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "phone",
+                                    "comment"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Alex"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "alex@gmail.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+79999999999"
+                                    },
+                                    "comment": {
+                                        "type": "string",
+                                        "example": "Your service is amazing!"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Contact",
+            "description": "Contact"
+        }
+    ]
+}

@@ -36,8 +36,7 @@ class ContactService
         return [
             'success' => true,
             'message' => 'Request received',
-            //'data' => $data,
-            'data' => $sentiment
+            'sentiment' => $sentiment
         ];
     }
 }
