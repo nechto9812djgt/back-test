@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Services\AIService;
 
 class ContactService
 {
@@ -11,7 +12,7 @@ class ContactService
         private MetricsService $metricsService,
         private MailService $mailService,
         private AIService $aiService,
-        private LogService $logService
+        private LogService $logService,
     ) {
     }
 
@@ -26,14 +27,17 @@ class ContactService
             );
         }
 
-        $this->metricsService->increment('unknown');
+        $sentiment = $this->aiService->analyzeSentiment($data['comment']);
+
+        $this->metricsService->increment($sentiment);
         $this->logService->contact($data, 'success');
         $this->mailService->send($data);
 
         return [
             'success' => true,
             'message' => 'Request received',
-            'data' => $data,
+            //'data' => $data,
+            'data' => $sentiment
         ];
     }
 }
